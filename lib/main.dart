@@ -49,25 +49,25 @@ class _MyHomePageState extends State<MyHomePage> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     
     try {
-      // Trying to set a string that starts with the list identifier.
+      // Trying to set a string that starts with the identifier for string lists.
       // This throws a Platform Exception
-      await prefs.setString(_PREF_KEY, 'VGhpcyBpcyB0aGUgcHJlZml4IGZvciBhIGxpc3Qu42.0');
+      await prefs.setString(_PREF_KEY, 'VGhpcyBpcyB0aGUgcHJlZml4IGZvciBhIGxpc3Qu42');
     }
     catch (e) {
-      debugPrint('Exception caught: ' + e.runtimeType.toString());
+      debugPrint('Exception caught: ' + e.toString());
     }
     
-    _readValue(); // This will read the value 'VGhpcyBpcyB0aGUgcHJlZml4IGZvciBhIGxpc3Qu42.0' from the preference cache even though it is not stored on the Android side
+    _readValue(); // This will read the value 'VGhpcyBpcyB0aGUgcHJlZml4IGZvciBhIGxpc3Qu42' from the preference cache even though it is not stored on the Android side
   }
   
   void _setValueWithoutExceptionHandling() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     
-    // Trying to set a string that starts with the list identifier.
+    // Trying to set a string that starts with the identifier for string lists.
     // This throws a Platform Exception
-    await prefs.setString(_PREF_KEY, 'VGhpcyBpcyB0aGUgcHJlZml4IGZvciBhIGxpc3Qu42.0');
+    await prefs.setString(_PREF_KEY, 'VGhpcyBpcyB0aGUgcHJlZml4IGZvciBhIGxpc3Qu42');
     
-    _readValue(); // This will read the value 'VGhpcyBpcyB0aGUgcHJlZml4IGZvciBhIGxpc3Qu42.0' from the preference cache even though it is not stored on the Android side
+    _readValue(); // This will not read the value 'VGhpcyBpcyB0aGUgcHJlZml4IGZvciBhIGxpc3Qu42' from the preference cache
   }
   
   void _clearAll() async {
@@ -96,7 +96,7 @@ class _MyHomePageState extends State<MyHomePage> {
               'This is the value taken from preference cache:\n',
             ),
             Text(
-              (_value ?? 'No value found in the cache') + '\n',
+              '' + (_value ?? 'null') + '\n',
               style: Theme.of(context).textTheme.headline6,
             ),
             ElevatedButton(
@@ -109,7 +109,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             ElevatedButton(
               onPressed: _clearAll,
-              child: Text('Clear Cache and platform-side storage')
+              child: Text('Clear dart-side cache and platform-side storage')
             ),
           ],
         ),
